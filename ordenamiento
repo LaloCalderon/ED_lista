@@ -1,0 +1,169 @@
+def max_number(lst):
+
+	numbers = []
+
+	for i in lst:
+
+		for d in str(i):
+
+			numbers.append(d)
+
+	max_number = max(numbers)
+
+	return int(max_number)
+
+
+
+def max_digits(lst):
+
+	aux = 0
+
+	for i in lst:
+
+		if(aux < len(str(i))):
+
+			aux = len(str(i))
+
+	return int(aux)
+
+
+
+class Node:
+
+	def __init__(self, data):
+
+		self.data = data
+
+		self.next = None
+
+
+
+class Lista():
+
+	def __init__(self):
+
+		self.head = None
+
+		self.tail = None
+
+		self.current = None
+
+		self.previous = None
+
+
+
+	def Link(self, data):
+
+		new_node = Node(data)
+
+		if(self.head == None):
+
+			self.head = new_node
+
+			self.tail = new_node
+
+		else:
+
+			self.tail.next = new_node
+
+			self.tail = new_node
+
+
+
+	def printList(self):
+
+		self.current = self.head
+
+		print("\n")
+
+		Lista_Auxiliar = []
+
+		while(self.current):
+
+			Lista_Auxiliar.append(self.current.data)
+
+			self.current = self.current.next
+
+		return Lista_Auxiliar
+
+
+
+	def delete(self):
+
+		self.current = self.head
+
+		match = False
+
+		while(self.current):
+
+			self.head = self.current.next
+
+			del(self.current)
+
+			self.current = self.head
+
+
+
+Buckets = []
+
+A = [15, 20, 34, 210, 512, 14, 8, 10]
+
+print("\nLa lista desordenada es: \n")
+
+print(A)
+
+m_n = max_number(A)
+
+aux = max_digits(A)
+
+indice = -1
+
+Orden = []
+
+for i in range(0, m_n + 1):
+
+	Buckets.append(Lista())
+
+
+
+while((-aux) <= indice):
+
+	for d in A:
+
+		p = list(str(d))
+
+		while(len(p) < aux):
+
+			p.insert(0, '0')
+
+		for i in range(0, m_n + 1):
+
+			if(p[indice] == str(i)):
+
+				Current = Buckets[i]
+
+				p = ''.join(p)
+
+				Current.Link(int(p))
+
+	A = []
+
+	for i in range(0, m_n + 1):
+
+		Lista_Auxiliar = Buckets[i].printList()
+
+		for j in Lista_Auxiliar:
+
+			A.append(j)
+
+		Buckets[i].delete()
+
+	indice = indice - 1
+
+	print(A)
+
+
+
+print("\nLa lista ordenada es: \n")
+
+print(A)
