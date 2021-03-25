@@ -1,0 +1,151 @@
+
+
+Ir al contenido
+Uso de Gmail con lectores de pantalla
+in:sent 
+Meet
+Nueva reunión
+Unirse a una reunión
+Hangouts
+
+Conversaciones
+11,33 GB ocupados de 15 GB (75 %)
+Términos · Privacidad · Política del programa
+Última actividad de la cuenta: hace 1 día
+Detalles
+#include<stdio.h>
+#define max 4
+
+struct cola
+{
+ int datos[max+1];
+ int inicio, final;
+ int nelem;
+};
+void crearCola(struct cola *q);
+void remover(struct cola *q,int *dato);
+void insertar(struct cola *q);
+void mostrar(struct cola *q);
+
+void remover(struct cola *q,int *dato)
+{
+	if(q->nelem==0)
+	{
+		printf("Cola vacía \n");
+	    q->inicio=q->final;
+	}
+	else
+	{
+		dato=q->datos[q->inicio];
+		q->nelem=q->nelem-1;
+		q->inicio=q->inicio+1;
+	}
+}
+
+void insertar(struct cola *q)
+{
+	int dato;
+	if(q->nelem==max)
+	{
+		printf("Cola llena\n");
+		printf("Elimine un elemento para agregar otro \n");
+		q->final=q->inicio;
+	}
+	else
+	{
+	printf("Introduce dato: \n");
+	scanf("%d", &dato);	
+	q->datos[q->final]=dato;
+	q->nelem=q->nelem+1;
+	q->final=q->final+1;
+	}
+}
+
+void mostrar(struct cola *q)
+{
+	int i;
+	if(q->nelem>0)
+	{
+		if(q->inicio>=q->final)
+		{
+			for(i=q->inicio; i<=max; i++)
+			{
+				printf("elemento: %d \n", q->datos[i]);
+			}
+			
+		    for(i=1; i<q->final; i++)
+			{
+				printf("elemento: %d \n", q->datos[i]);
+			}
+	    }
+	     else
+	    	{
+	     for(i=q->inicio; i<q->final; i++)
+		 {
+			printf("Elemento %d \n", q->datos[i]);
+		 }	
+		    }
+        }
+		
+else
+{
+	printf("cola vacía\n");
+}
+}
+
+
+int main()
+{
+	
+  int i;
+ struct cola C;
+ char op;
+ int dato;
+ 
+ crearCola(&C);
+ 
+ do
+ {
+ 
+ puts("1) Agregar un elemento");
+ puts("2) Sacar un elemento");
+ puts("3) Mostrar Cola");
+ puts("4) Salida"); 
+ printf("Opcion:\n "); 
+ scanf("%s",&op);
+
+
+ switch(op){
+ case '1': 
+ insertar(&C);
+  
+ 
+ break;
+ case '2':
+ remover(&C, &dato);
+ break;
+ 
+ case '3':
+ mostrar(&C);
+ 
+ break;
+  case '4':
+  	printf("Usted seleccionó salir");
+  	return 5;
+  break;
+ }
+ }while(op!='4');
+ return 0;
+}
+
+void crearCola(struct cola * q)
+
+{
+ q->inicio=1;
+ q->final=1;
+  q->nelem=0;
+}
+
+
+colaCircular.c
+Mostrando colaCircular.c.
