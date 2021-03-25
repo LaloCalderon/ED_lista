@@ -1,0 +1,136 @@
+class Node:
+
+    def __init__(self,data):
+
+        self.data=data
+
+        self.next=None
+
+class Lista():
+
+    def __init__(self):
+
+        self.head=None
+
+        self.current=None
+
+        self.tail=None
+
+        self.previous=None
+
+    def link(self,data):
+
+        new_node=Node(data)
+        
+        if (self.head==None):
+
+            self.head=new_node
+
+            self.tail=new_node
+
+        else:
+
+            self.tail.next=new_node
+
+            self.tail=new_node
+
+    def printList(self):
+
+        self.current=self.head
+
+        
+
+        while(self.current):
+
+            print("Data: "+str(self.current.data)+ "\n")
+
+            self.current=self.current.next
+
+    def search(self,data):
+
+        self.current=self.head
+
+        i=0
+
+        match=False
+
+        while(self.current):
+
+            if (self.current.data==data):
+
+                print("El dato "+str(data)+" se encontro en la posicion "+str(i+1))
+
+                match=True
+
+                break
+
+            else:
+
+                self.current=self.current.next
+
+                i=i+1
+
+        if (match==False):
+
+            print("El dato "+str(data)+"no se encuentra en la lista")
+
+    def delete(self,data):
+
+        self.current=self.head
+
+        match=False
+
+        while(self.current):
+           
+            if (self.current.data==data):
+               
+                if(self.current==self.head):
+                    
+                    self.head=self.current.next
+
+                    del(current)
+
+                    self.current=self.head
+
+                    break
+                
+                elif(self.current==self.tail):
+                    self.tail=self.previous.next
+
+                    self.previous.next=None
+
+                    del(self.current)
+
+                    break
+
+                else:
+
+                    self.previous.next=self.current.next
+
+                    del(self.current)
+
+                    self.current=self.previous.next
+
+                    break
+
+            else:
+
+                self.previous=self.current
+
+                self.current=self.current.next
+
+lst=Lista()
+
+num=[1,2,3,4,5,6,6,7]
+
+for i in num:
+
+    lst.link(i)
+
+lst.printList()
+
+lst.search(6)
+
+lst.delete(6)
+
+lst.printList()
